@@ -1,16 +1,22 @@
 package com.leandrobaroni2103.cursomc.domain;
 
 import java.io.Serializable;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 @Entity
 public class Categoria implements Serializable{
 
 	private static final long serialVersionUID = 1L;
+	
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
+	
 	private String nome;
-
-	public Categoria() {
-	}
 
 	@Override
 	public int hashCode() {
@@ -35,6 +41,9 @@ public class Categoria implements Serializable{
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public Categoria() {
 	}
 
 	public Categoria(Integer id, String nome) {
