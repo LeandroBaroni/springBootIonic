@@ -1,6 +1,8 @@
 package com.leandrobaroni2103.cursomc.resourses;
 
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.leandrobaroni2103.cursomc.domain.Categoria;
+import com.leandrobaroni2103.cursomc.dto.CategoriaDTO;
 import com.leandrobaroni2103.cursomc.services.CategoriaService;
 
 @RestController
@@ -46,5 +49,14 @@ public class CategoriaResourse {
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
+	}
+
+	@RequestMapping(method=RequestMethod.GET)
+	public ResponseEntity<List<CategoriaDTO>> listarTudo() {
+		List<Categoria> list = service.buscarTudo();
+		List<CategoriaDTO> listDTO = list.stream()
+				.map(obj -> new CategoriaDTO(obj))
+				.collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDTO);
 	}
 }
