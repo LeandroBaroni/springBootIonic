@@ -8,9 +8,6 @@ public class FieldMessage implements Serializable{
 	private String fieldName;
 	private String message;
 
-	private FieldMessage(){
-	}
-
 	public FieldMessage(String fieldName, String message) {
 		super();
 		this.fieldName = fieldName;
